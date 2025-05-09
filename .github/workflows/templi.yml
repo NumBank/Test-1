@@ -1,0 +1,25 @@
+
+name: Templi Generate
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Update packages
+        run: pacman -Syu --noconfirm
+
+      - name: Install Node.js
+        run: pacman
+        
+      - name: Install templi generate cli
+        run: yay -Sy templi_cli
+
+      - name: Generate templi model
+        run: templi generate -t https://github.com/RickaPrincy/templi-express-js.git -o generated -project-name ProjectName -license MIT
